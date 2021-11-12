@@ -7,13 +7,12 @@ import 'package:myfoodz/Screens/SplashScreen.dart';
 
 void main() {
   runApp(MaterialApp(
-    initialRoute: '/',
-    routes: {
-      '/': (context)=>SplashScreen(),
-      '/Home': (context)=> HomePage(),
-      '/Chart': (context)=> ChartPage(),
-      '/Add': (context)=> AddPage(),
-  },
-  ));
+        initialRoute: '/Home',
+        routes: {
+          '/': (context)=>SplashScreen(),
+          '/Home': (context)=> HomePage(),
+          '/Chart': (context)=> ChartPage(),
+          '/Add': (context)=> AddPage(),
+      }));
 }
 
