@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:myfoodz/Widgets/DateBlock.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({ Key? key }) : super(key: key);
@@ -33,7 +32,6 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             SizedBox(height: 50,),
-            DateBlock()
           ],
         ),
       ),
