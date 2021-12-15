@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "908971264680",
+    "project_id": "myfoodz-4e8cd",
+    "storage_bucket": "myfoodz-4e8cd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:908971264680:android:5a99ded1196cee4744509d",
+        "android_client_info": {
+          "package_name": "com.birifresh.myfoodz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "908971264680-73iki4oj4faghkfpb2avgl021uelk3b7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLZMsFbLMsV5LN3ERJAWJ-PLZ8oZdIh4w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "908971264680-73iki4oj4faghkfpb2avgl021uelk3b7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
