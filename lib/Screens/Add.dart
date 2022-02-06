@@ -27,7 +27,7 @@ class _AddPageState extends State<AddPage> {
               ),
               SizedBox(height: 20,),
               Text('Total Price', style: TextStyle(fontFamily: 'Poppins', fontSize: 18, fontWeight: FontWeight.w600),),
-              Text('100.02 Zl', style: TextStyle(fontFamily: 'Poppins',fontSize: 40, fontWeight: FontWeight.w700, color: Colors.white),),
+              Text('78.02 Zl', style: TextStyle(fontFamily: 'Poppins',fontSize: 40, fontWeight: FontWeight.w700, color: Colors.white),),
               SizedBox(height: 20,),
               Text('Done on 11/05/2021',style: TextStyle(fontFamily: 'Poppins',fontSize: 16,),),
               SizedBox(height: 10,),
