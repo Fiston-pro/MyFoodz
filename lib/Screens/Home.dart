@@ -19,9 +19,9 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                IconButton(onPressed: (){}, icon: Icon(Icons.bar_chart_rounded,size: 40,color: Colors.white,)),
+                IconButton(onPressed: (){Navigator.pushNamed(context, '/Chart');}, icon: Icon(Icons.bar_chart_rounded,size: 40,color: Colors.white,)),
                 Text('MY FOODZ',style: TextStyle(fontSize: 23, fontFamily: 'Poppins',color: Colors.white,  fontWeight: FontWeight.w700)),
-                IconButton(onPressed: (){}, icon: Icon(Icons.add_rounded,size: 40,color: Colors.white,),)
+                IconButton(onPressed: (){Navigator.pushNamed(context, '/Add');}, icon: Icon(Icons.add_rounded,size: 40,color: Colors.white,),)
               ],
             ),
             SizedBox(height: 100,),
