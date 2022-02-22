@@ -5,7 +5,18 @@ class User {
   var foods = Map<String,Map<String,Map<String,String>>>();
   var history = Map<String,List<Map<String,String>>>();
 
-  User({required this.name,required this.birthdate});
+  User({required this.name,required this.birthdate, required this.foods,required this.history});
+
+  //get data from map of firestore
+  factory User.fromMap(Map<String,dynamic>? data){
+      return User(
+      name: data!["name"],
+      birthdate:  data!["birthdate"],
+      foods:  data!["foods"],
+      history:  data!["history"],
+    );
+  }
+
   //sends the name
   String get_name(){
     return name;

@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_login/flutter_login.dart';
+import 'package:flutter_login/flutter_login.dart'; //Package for login page
 import 'package:myfoodz/Screens/Home.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart'; //firebase
+
 
 const users = const {
   'dribbble@gmail.com': '12345',
   'hunter@gmail.com': 'hunter',
 };
 
+var uid;
+
 class LoginScreen extends StatelessWidget {
   Duration get loginTime => Duration(milliseconds: 2250);
 
   Future<String?> _authUser(LoginData data) async {
     //debugPrint('Name: ${data.name}, Password: ${data.password}');
-    FirebaseAuth auth = FirebaseAuth.instance;
     try {
       UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: data.name,
         password: data.password
-      );
+       ) ;
       return null;
     } on FirebaseAuthException catch (e) {
       var message = "";
@@ -44,10 +46,16 @@ class LoginScreen extends StatelessWidget {
     //debugPrint('Signup Name: ${data.name}, Password: ${data.password}');
     
     try {
-      UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: data.name.toString(),
         password: data.password.toString()
       );
+      //verify the email
+      User? user = FirebaseAuth.instance.currentUser;
+      if (user!= null && !user.emailVerified) {
+        await user.sendEmailVerification();
+      }
+      // go back to login page
       return null;
     } on FirebaseAuthException catch (e) {
       var message = "";
