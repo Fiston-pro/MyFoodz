@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart'; //Package for login page
 import 'package:myfoodz/Screens/Home.dart';
-import 'package:firebase_auth/firebase_auth.dart'; //firebase
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:myfoodz/modal.dart'; //firebase
 
 
 const users = const {
@@ -9,7 +11,6 @@ const users = const {
   'hunter@gmail.com': 'hunter',
 };
 
-var uid;
 
 class LoginScreen extends StatelessWidget {
   Duration get loginTime => Duration(milliseconds: 2250);
@@ -17,7 +18,7 @@ class LoginScreen extends StatelessWidget {
   Future<String?> _authUser(LoginData data) async {
     //debugPrint('Name: ${data.name}, Password: ${data.password}');
     try {
-      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: data.name,
         password: data.password
        ) ;
@@ -55,6 +56,8 @@ class LoginScreen extends StatelessWidget {
       if (user!= null && !user.emailVerified) {
         await user.sendEmailVerification();
       }
+      //make an instance for user
+      post_data_to_firestore(data);
       // go back to login page
       return null;
     } on FirebaseAuthException catch (e) {
@@ -70,7 +73,7 @@ class LoginScreen extends StatelessWidget {
       return message;
     }
   }
-
+  //recover password
   Future<String> _recoverPassword(String name) {
     debugPrint('Name: $name');
     return Future.delayed(loginTime).then((_) {
@@ -96,4 +99,14 @@ class LoginScreen extends StatelessWidget {
       onRecoverPassword: _recoverPassword,
     );
   }
+
+  // post data to firestore
+  post_data_to_firestore(data) async {
+    User? userInfo = FirebaseAuth.instance.currentUser;
+    //populate user object
+    UserData user =UserData(name: data.name, birthdate: "", foods: {}, history: {}, email: userInfo?.email, uid: userInfo!.uid);
+    //post data to firestore
+    await FirebaseFirestore.instance.collection("users").doc(userInfo.uid).set(user.toMap());
+  }
+
 }

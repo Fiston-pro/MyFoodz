@@ -7,9 +7,9 @@ class DatabaseService {
   //initialise firestore
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
-  Future<User>? get_data (String id) async{
+  Future<UserData>? get_data (String id) async{
     var snap = await _db.collection("users").doc(id).get();
-    return User.fromMap(snap.data());
+    return UserData.fromMap(snap.data());
   }
 
 }

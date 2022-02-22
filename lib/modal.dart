@@ -1,20 +1,37 @@
 
-class User {
+class UserData {
   late String name;
+  late String? email;
   late String birthdate;
+  late String uid;
   var foods = Map<String,Map<String,Map<String,String>>>();
   var history = Map<String,List<Map<String,String>>>();
 
-  User({required this.name,required this.birthdate, required this.foods,required this.history});
+  UserData({required this.name,required this.birthdate, required this.foods,
+  required this.history, required this.email, required this.uid});
 
   //get data from map of firestore
-  factory User.fromMap(Map<String,dynamic>? data){
-      return User(
+  factory UserData.fromMap(Map<String,dynamic>? data){
+      return UserData(
       name: data!["name"],
+      email: data!["email"],
       birthdate:  data!["birthdate"],
+      uid: data!["uid"],
       foods:  data!["foods"],
       history:  data!["history"],
+
     );
+  }
+  // send data to firestore
+  Map<String,dynamic> toMap(){
+    return ({
+      "name": name,
+      "email": email,
+      "uid": uid,
+      "birthdate": birthdate,
+      "foods": foods,
+      "history": history
+    });
   }
 
   //sends the name
