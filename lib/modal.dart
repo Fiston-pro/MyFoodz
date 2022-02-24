@@ -60,3 +60,5 @@ class UserData {
   }
 
 }
+
+// Thought of making different modals but the problem I would increase the boilerplate code
