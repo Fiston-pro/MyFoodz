@@ -62,7 +62,7 @@ class AuthService {
       if (user!= null && !user.emailVerified) {
         await user.sendEmailVerification();
       }
-      //make an instance for user
+      //Initialise data in firebase
       post_data_to_firestore(data);
       // go back to login page
       return null;
