@@ -14,11 +14,11 @@ class UserData {
   factory UserData.fromMap(Map<String,dynamic>? data){
       return UserData(
       name: data!["name"],
-      email: data!["email"],
-      birthdate:  data!["birthdate"],
-      uid: data!["uid"],
-      foods:  data!["foods"],
-      history:  data!["history"],
+      email: data["email"]??"",
+      birthdate:  data["birthdate"]??"",
+      uid: data["uid"]??"",
+      foods:  data["foods"]??{},
+      history:  data["history"]??{},
 
     );
   }
