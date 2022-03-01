@@ -18,7 +18,7 @@ void main() async{
   await Firebase.initializeApp();
   //first check if the user is logged in and go ahead to the app
   FirebaseAuth.instance
-  .authStateChanges()
+  .userChanges()
   .listen((User? user) {
     if (user == null) {
       //User is signed out

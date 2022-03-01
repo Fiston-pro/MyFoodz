@@ -28,7 +28,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlutterLogin(
-      title: 'My Foodz',
+      //title: 'My Foodz',
       logo: AssetImage("assets/logo.png").assetName,
       onLogin: authService.authUser,
       onSignup: authService.signupUser,
@@ -38,6 +38,13 @@ class LoginScreen extends StatelessWidget {
         ));
       },
       onRecoverPassword: _recoverPassword,
+      theme: LoginTheme(
+        logoWidth: 1,
+        primaryColor: Colors.green,
+        pageColorDark: Color.fromRGBO(189, 225, 181, 1),
+        pageColorLight: Colors.green,
+
+      ),
     );
   }
 
