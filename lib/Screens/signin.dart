@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart'; //Package for login page
 import 'package:myfoodz/Screens/SplashScreen.dart';
@@ -15,15 +16,10 @@ class LoginScreen extends StatelessWidget {
   AuthService authService = new AuthService();
 
   //recover password
-  Future<String> _recoverPassword(String name) {
-    debugPrint('Name: $name');
-    return Future.delayed(loginTime).then((_) {
-      if (!users.containsKey(name)) {
-        return 'User not exists';
-      }
-      return "null";
-    });
-  }
+  Future<String?>? resetPassword(String email) async {
+    await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+    return "null";
+}
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +33,7 @@ class LoginScreen extends StatelessWidget {
           builder: (context) => SplashScreen(),
         ));
       },
-      onRecoverPassword: _recoverPassword,
+      onRecoverPassword: resetPassword(String email),
       theme: LoginTheme(
         logoWidth: 1,
         primaryColor: Colors.green,

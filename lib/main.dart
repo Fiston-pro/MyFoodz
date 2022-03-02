@@ -17,16 +17,10 @@ void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   //first check if the user is logged in and go ahead to the app
-  FirebaseAuth.instance
-  .userChanges()
-  .listen((User? user) {
-    if (user == null) {
-      //User is signed out
-      LoginScreen();
-    } else {
+
       // User is signed in
       //get data from firebase
-      var user_data = DatabaseService().get_data(user.uid);
+      //var user_data = DatabaseService().get_data(user!.uid);
       //provide data to widgets
       //use statenotifier to pass the object down the tree
       runApp(ProviderScope(
@@ -39,8 +33,6 @@ void main() async{
                 '/Add': (context)=> AddPage(),
             }),
       ));
-    }
-  });
-
+    
 }
 

@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:myfoodz/Screens/signin.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:myfoodz/Screens/Home.dart';
 
@@ -12,7 +14,8 @@ class SplashScreen extends StatelessWidget {
       backgroundColor: Color.fromRGBO(189, 225, 181, 1),
       splash: Image.asset('assets/logo.png'),
       splashIconSize: double.infinity,
-      nextScreen: HomePage(),
+      //checks if the user is signed in and goes to homepage or to first signthem in
+      nextScreen: FirebaseAuth.instance.currentUser != null ? HomePage() : LoginScreen(),
       splashTransition: SplashTransition.fadeTransition,
       pageTransitionType: PageTransitionType.bottomToTop,
     );
