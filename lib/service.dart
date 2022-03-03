@@ -20,11 +20,7 @@ class DatabaseService {
 
 // FireBase Auth class
 class AuthService {
-
-
-  
     Future<String?> authUser(LoginData data) async {
-    //debugPrint('Name: ${data.name}, Password: ${data.password}');
     try {
        await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: data.name,
@@ -50,7 +46,6 @@ class AuthService {
       return message;
     }
   }
-
   Future<String?> signupUser(SignupData data) async {
     //debugPrint('Signup Name: ${data.name}, Password: ${data.password}');
     
@@ -81,8 +76,6 @@ class AuthService {
       return message;
     }
   }
-
-  //Recover password
   Future<String?> resetPassword(String email) async {
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);

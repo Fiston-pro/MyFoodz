@@ -50,90 +50,150 @@ class _AddPageState extends State<AddPage> {
 
     );
   }
+
+  // add to list
+
       Future<Object> itemInput(BuildContext context) async {
+          String metric = "/Kg";
           return showDialog(
             context: context,
             builder: (context) {
+              String contentText = "Content of Dialog";
+            return StatefulBuilder(
+              builder: (context, setState) {
               return AlertDialog(
                   backgroundColor: Color.fromRGBO(189, 225, 181, 1),
-                  title: const Text('Add new item', style: TextStyle(color: Colors.white,fontWeight: FontWeight.w700, fontFamily: 'Poppins')),
-                  content: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      TextField(
-                        maxLength: 20,
-                        cursorColor: Colors.black,
-                        style: TextStyle(
-                          fontFamily: 'Poppins'
-                        ),
-                        decoration:
-                            InputDecoration(
+                  title: const Text('Add new item', style: TextStyle(color: Colors.green, fontWeight: FontWeight.w700, fontFamily: 'Poppins')),
+                  content: Container(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        TextField(
+                          maxLength: 15,
+                          cursorColor: Colors.black,
+                          style: TextStyle(
+                            fontFamily: 'Poppins'
+                          ),
+                          decoration:
+                              InputDecoration(
+                                hintText: "Enter an Item",
+                                contentPadding: EdgeInsets.symmetric(horizontal: 20),
+                                hintStyle: TextStyle(color: Colors.black,fontWeight: FontWeight.w500,letterSpacing: 1),
+                                counterText: "",
+                                ),
                               
-                              hintText: "Enter an Item",
-                              hintStyle: TextStyle(color: Colors.black,fontWeight: FontWeight.w500,letterSpacing: 1),
-                              filled: true,
-                              fillColor: Colors.white,
-                              counterText: "",
-                              border: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              borderRadius: BorderRadius.circular(0)
-                          ),
-                              ),
-                            
-                      ),
-                      TextField(
-                        keyboardType: TextInputType.number,
-                        maxLength: 5,
-                        cursorColor: Colors.black,
-                        style: TextStyle(
-                          fontFamily: 'Poppins'
                         ),
-                        decoration:
-                            InputDecoration(
-                              hintText: "Enter the Quantity",
-                              hintStyle: TextStyle(color: Colors.black,fontWeight: FontWeight.w500,letterSpacing: 1),
-                              filled: true,
-                              fillColor: Colors.white,
-                              counterText: "",
-                              border: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                          ),
+                        Row(
+                          children: [
+                            Expanded(
+                              flex: 2,
+                              child: TextField(
+                                keyboardType: TextInputType.number,
+                                maxLength: 5,
+                                cursorColor: Colors.black,
+                                style: TextStyle(
+                                  fontFamily: 'Poppins'
+                                ),
+                                decoration:
+                                    InputDecoration(
+                                      hintText: "Qty",
+                                      hintStyle: TextStyle(color: Colors.black,fontWeight: FontWeight.w500,letterSpacing: 1),
+                                      contentPadding: EdgeInsets.symmetric(horizontal: 20),
+                                      counterText: "",
+                                      border: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                  ),
+                                      ),
+                                    
                               ),
-                            
-                      ),
-                      TextField(
-                        maxLength: 5,
-                        cursorColor: Colors.black,
-                        style: TextStyle(
-                          fontFamily: 'Poppins'
+                            ),
+                            Text(" X ", style: TextStyle(fontWeight: FontWeight.w700,fontFamily: "Poppins"),),                            
+                            Expanded(
+                              flex: 2,
+                              child: TextField(
+                                keyboardType: TextInputType.number,
+                                maxLength: 5,
+                                cursorColor: Colors.black,
+                                style: TextStyle(
+                                  fontFamily: 'Poppins'
+                                ),
+                                decoration:
+                                    InputDecoration(
+                                      hintText: "P/U",
+                                      hintStyle: TextStyle(color: Colors.black,fontWeight: FontWeight.w500,letterSpacing: 1),
+                                      contentPadding: EdgeInsets.symmetric(horizontal: 20),                            
+                                      counterText: "",
+                                      border: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                  ),
+                                      ),
+                                    
+                              ),
+                            ),
+                            SizedBox(
+                              width: 50,
+                              child: DropdownButton(
+                                dropdownColor: Color.fromRGBO(189, 225, 181, 1),
+                                alignment: AlignmentDirectional.bottomEnd,
+                                iconEnabledColor: Colors.green,
+                                icon: const Icon(Icons.keyboard_arrow_down), 
+                                items: ["/Pc","/Kg","/Lb","/L"].map( (val) {
+                                  return DropdownMenuItem(
+                                    value: val,
+                                    child: Text(val,style: TextStyle(fontWeight: FontWeight.w500),)
+                                    );
+                                }).toList(),                               
+                                value: metric,                              
+                                onChanged: (String? val){
+                                  setState(() {
+                                  metric = val!;
+                                });
+                                }),
+                            )
+                          ],
                         ),
-                        decoration:
-                            InputDecoration(
-                              
-                              hintText: "Enter the Total Price",
-                              hintStyle: TextStyle(color: Colors.black,fontWeight: FontWeight.w500,letterSpacing: 1),
-                              filled: true,
-                              fillColor: Colors.white,
-                              counterText: "",
-                              border: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                          ),
+                        Row(
+                          children: [
+                            Text("  = ",style: TextStyle(fontFamily: "Poppins",fontWeight: FontWeight.w700),),
+                            Expanded(
+                              child: TextField(
+                                keyboardType: TextInputType.number,
+                                maxLength: 5,
+                                cursorColor: Colors.black,
+                                style: TextStyle(
+                                  fontFamily: 'Poppins'
+                                ),
+                                decoration:
+                                    InputDecoration(
+                                      hintText: "Total Price",
+                                      hintStyle: TextStyle(color: Colors.black,fontWeight: FontWeight.w500,letterSpacing: 1),
+                                      counterText: "",
+                                      border: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                  ),
+                                      ),
+                                    
                               ),
-                            
-                      ),
-                      
-                    ],
-                  ),
-                  actions: <Widget>[
-                    TextButton(
-                      onPressed: () => Navigator.pop(context, 'Cancel'),
-                      child: const Text('Cancel', style: TextStyle(color: Colors.white,fontWeight: FontWeight.w700, fontFamily: 'Poppins')),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            TextButton(
+                              onPressed: () => Navigator.pop(context, 'Cancel'),
+                              child: const Text('Cancel', style: TextStyle(fontSize: 20, color: Colors.green,fontWeight: FontWeight.w700, fontFamily: 'Poppins')),
+                            ),
+                            TextButton(
+                              onPressed: () => Navigator.pop(context, 'OK'),
+                              child: const Text('OK', style: TextStyle(fontSize: 20, color: Colors.green,fontWeight: FontWeight.w700, fontFamily: 'Poppins')),
+                            ),],
+                        )
+                      ],
                     ),
-                    TextButton(
-                      onPressed: () => Navigator.pop(context, 'OK'),
-                      child: const Text('OK', style: TextStyle(color: Colors.white,fontWeight: FontWeight.w700, fontFamily: 'Poppins')),
-                    ),]);
+                  ));
             },
           );
+            });
         }
 }
