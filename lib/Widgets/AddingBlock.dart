@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:myfoodz/Widgets/BiggerFoodTile.dart';
 
 class AddingBlock extends StatefulWidget {
-  const AddingBlock({ Key? key }) : super(key: key);
+  List<Map<String, dynamic>> data;
+  AddingBlock( { Key? key, required this.data }) : super(key: key);
 
   @override
   _AddingBlockState createState() => _AddingBlockState();
@@ -26,7 +27,9 @@ class _AddingBlockState extends State<AddingBlock> {
             ],
           ),
           SizedBox(height: 10,),
-          BiggerFoodTile()
+          Column(
+            children: widget.data.map((val) => BiggerFoodTile( data: val)).toList() ,
+          )
         ]
     )
     );

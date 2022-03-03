@@ -9,6 +9,24 @@ class AddPage extends StatefulWidget {
 }
 
 class _AddPageState extends State<AddPage> {
+  // controllers of dialog input
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final itemController = TextEditingController();
+  final qtyController = TextEditingController();
+  final puController = TextEditingController();
+  final tpController = TextEditingController();
+
+  List<Map<String,dynamic>> data = [];  //data
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    itemController.dispose();
+    qtyController.dispose();
+    puController.dispose();
+    tpController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,11 +45,11 @@ class _AddPageState extends State<AddPage> {
               ),
               SizedBox(height: 20,),
               Text('Total Price', style: TextStyle(fontFamily: 'Poppins', fontSize: 18, fontWeight: FontWeight.w600),),
-              Text('78.02 Zl', style: TextStyle(fontFamily: 'Poppins',fontSize: 40, fontWeight: FontWeight.w700, color: Colors.white),),
+              Text('90.02 Zl', style: TextStyle(fontFamily: 'Poppins',fontSize: 40, fontWeight: FontWeight.w700, color: Colors.white),),
               SizedBox(height: 20,),
               Text('Done on 11/05/2021',style: TextStyle(fontFamily: 'Poppins',fontSize: 16,),),
               SizedBox(height: 10,),
-              AddingBlock()
+              AddingBlock(data: data,)
             ],
           ),
         )
@@ -39,23 +57,24 @@ class _AddPageState extends State<AddPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          Object item = await itemInput(context);
+          var item = await itemInput(context);
+          setState(() {
+            data.add(item);
+          });
         },
         backgroundColor: Colors.white,
         tooltip: 'Add',
         child: Icon(Icons.add, size: 24,color: Colors.black,),
       ),
-
-
-
     );
   }
 
   // add to list
-
-      Future<Object> itemInput(BuildContext context) async {
+      //----------------------------------------------------------------------------- Dialog  box ----------------------------------------------------------------------------
+      Future<Map<String,dynamic>> itemInput(BuildContext context) async {
           String metric = "/Kg";
-          return showDialog(
+          Map<String,String> data;
+          return await showDialog(
             context: context,
             builder: (context) {
               String contentText = "Content of Dialog";
@@ -64,12 +83,17 @@ class _AddPageState extends State<AddPage> {
               return AlertDialog(
                   backgroundColor: Color.fromRGBO(189, 225, 181, 1),
                   title: const Text('Add new item', style: TextStyle(color: Colors.green, fontWeight: FontWeight.w700, fontFamily: 'Poppins')),
-                  content: Container(
+                  content: Form(
+                    key: _formKey,
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        TextField(
+                        TextFormField(
+                          validator: (text) {
+                            return text!.isNotEmpty ? null : "Enter a name";
+                          },
                           maxLength: 15,
+                          controller: itemController,
                           cursorColor: Colors.black,
                           style: TextStyle(
                             fontFamily: 'Poppins'
@@ -87,8 +111,12 @@ class _AddPageState extends State<AddPage> {
                           children: [
                             Expanded(
                               flex: 2,
-                              child: TextField(
+                              child: TextFormField(
+                                validator: (text) {
+                                  return text!.isNotEmpty ? null : "No Qty";
+                                },
                                 keyboardType: TextInputType.number,
+                                controller: qtyController,
                                 maxLength: 5,
                                 cursorColor: Colors.black,
                                 style: TextStyle(
@@ -110,8 +138,12 @@ class _AddPageState extends State<AddPage> {
                             Text(" X ", style: TextStyle(fontWeight: FontWeight.w700,fontFamily: "Poppins"),),                            
                             Expanded(
                               flex: 2,
-                              child: TextField(
+                              child: TextFormField(
+                                validator: (text) {
+                                  return text!.isNotEmpty ? null : "No P/U";
+                                },
                                 keyboardType: TextInputType.number,
+                                controller: puController,
                                 maxLength: 5,
                                 cursorColor: Colors.black,
                                 style: TextStyle(
@@ -153,11 +185,16 @@ class _AddPageState extends State<AddPage> {
                           ],
                         ),
                         Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text("  = ",style: TextStyle(fontFamily: "Poppins",fontWeight: FontWeight.w700),),
                             Expanded(
-                              child: TextField(
+                              child: TextFormField(
+                                validator: (text) {
+                                  return text!.isNotEmpty ? null : "Enter a Total Price";
+                                },
                                 keyboardType: TextInputType.number,
+                                controller: tpController,
                                 maxLength: 5,
                                 cursorColor: Colors.black,
                                 style: TextStyle(
@@ -181,11 +218,17 @@ class _AddPageState extends State<AddPage> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             TextButton(
-                              onPressed: () => Navigator.pop(context, 'Cancel'),
+                              onPressed: () => Navigator.pop(context),
                               child: const Text('Cancel', style: TextStyle(fontSize: 20, color: Colors.green,fontWeight: FontWeight.w700, fontFamily: 'Poppins')),
                             ),
                             TextButton(
-                              onPressed: () => Navigator.pop(context, 'OK'),
+                              onPressed: () => {
+                                if (_formKey.currentState!.validate()) {
+                                  data = {"name":itemController.text,"qty":qtyController.text,"p/u":puController.text,"metric": metric,"tp":tpController.text},
+                                  clean_Controllers(),
+                                  Navigator.pop(context, data)
+                                }
+                                },
                               child: const Text('OK', style: TextStyle(fontSize: 20, color: Colors.green,fontWeight: FontWeight.w700, fontFamily: 'Poppins')),
                             ),],
                         )
@@ -195,5 +238,11 @@ class _AddPageState extends State<AddPage> {
             },
           );
             });
+        }
+        void clean_Controllers(){
+          itemController.text = "";
+          qtyController.text = "";
+          puController.text = "";
+          tpController.text = "";
         }
 }
