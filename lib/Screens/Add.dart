@@ -16,8 +16,8 @@ class _AddPageState extends State<AddPage> {
   final puController = TextEditingController();
   final tpController = TextEditingController();
 
-  List<Map<String,dynamic>> data = [];  //data
-
+  List<Map<String,dynamic>> data = [];  //data for all items
+  int totalPrice = 0;  //total price to be displayed big on the add page
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
@@ -45,7 +45,7 @@ class _AddPageState extends State<AddPage> {
               ),
               SizedBox(height: 20,),
               Text('Total Price', style: TextStyle(fontFamily: 'Poppins', fontSize: 18, fontWeight: FontWeight.w600),),
-              Text('90.02 Zl', style: TextStyle(fontFamily: 'Poppins',fontSize: 40, fontWeight: FontWeight.w700, color: Colors.white),),
+              Text( totalPrice.toString() +' Zl', style: TextStyle(fontFamily: 'Poppins',fontSize: 40, fontWeight: FontWeight.w700, color: Colors.white),),
               SizedBox(height: 20,),
               Text('Done on 11/05/2021',style: TextStyle(fontFamily: 'Poppins',fontSize: 16,),),
               SizedBox(height: 10,),
@@ -57,9 +57,10 @@ class _AddPageState extends State<AddPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          var item = await itemInput(context);
+          Map<String,dynamic> item = await itemInput(context);
           setState(() {
             data.add(item);
+            totalPrice = totalPrice + int.parse(item["tp"]);
           });
         },
         backgroundColor: Colors.white,
@@ -122,6 +123,9 @@ class _AddPageState extends State<AddPage> {
                                 style: TextStyle(
                                   fontFamily: 'Poppins'
                                 ),
+                                onChanged: (text){
+                                  changeQty();
+                                },
                                 decoration:
                                     InputDecoration(
                                       hintText: "Qty",
@@ -149,6 +153,9 @@ class _AddPageState extends State<AddPage> {
                                 style: TextStyle(
                                   fontFamily: 'Poppins'
                                 ),
+                                onChanged: (text){
+                                  changePu();
+                                },
                                 decoration:
                                     InputDecoration(
                                       hintText: "P/U",
@@ -200,6 +207,9 @@ class _AddPageState extends State<AddPage> {
                                 style: TextStyle(
                                   fontFamily: 'Poppins'
                                 ),
+                                onChanged: (text){
+                                  changeTp();
+                                },
                                 decoration:
                                     InputDecoration(
                                       hintText: "Total Price",
@@ -225,7 +235,7 @@ class _AddPageState extends State<AddPage> {
                               onPressed: () => {
                                 if (_formKey.currentState!.validate()) {
                                   data = {"name":itemController.text,"qty":qtyController.text,"p/u":puController.text,"metric": metric,"tp":tpController.text},
-                                  clean_Controllers(),
+                                  cleanControllers(),
                                   Navigator.pop(context, data)
                                 }
                                 },
@@ -239,10 +249,39 @@ class _AddPageState extends State<AddPage> {
           );
             });
         }
-        void clean_Controllers(){
+
+        void cleanControllers(){
           itemController.text = "";
           qtyController.text = "";
           puController.text = "";
           tpController.text = "";
         }
+        // Balance the value of tp according qty and p/u
+        void changePu(){
+          if (qtyController.text.isNotEmpty && puController.text.isNotEmpty){
+            tpController.text = (double.parse(qtyController.text)*double.parse(puController.text)).toStringAsFixed(2).toString();
+          }else if (puController.text.isEmpty){
+            tpController.text = "";
+          }
+        }
+        // Balance the value of p/u according tp and qty
+        void changeTp(){
+          if (tpController.text != "" && qtyController.text != ""){
+            puController.text = (double.parse(tpController.text)/double.parse(qtyController.text)).toStringAsFixed(2).toString();
+          }else if (tpController.text.isEmpty){
+            puController.text = "";
+          }else if (qtyController.text.isEmpty && puController.text.isNotEmpty){
+            puController.text = (double.parse(tpController.text)/double.parse(puController.text)).toStringAsFixed(2).toString();            
+          }
+        }
+        // onchange of Qty text field
+        void changeQty(){
+          if (puController.text.isEmpty){
+            changeTp();
+          }
+          if(tpController.text.isNotEmpty){
+            changePu();
+          } 
+        }
+
 }
