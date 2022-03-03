@@ -20,6 +20,8 @@ class DatabaseService {
 
 // FireBase Auth class
 class AuthService {
+
+
   
     Future<String?> authUser(LoginData data) async {
     //debugPrint('Name: ${data.name}, Password: ${data.password}');
@@ -79,6 +81,17 @@ class AuthService {
       return message;
     }
   }
+
+  //Recover password
+  Future<String?> resetPassword(String email) async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      return "null";      
+    } on FirebaseAuthException catch (e) {
+      return e.message;
+    }
+}
+
     // post data to firestore
   post_data_to_firestore(data) async {
     User? userInfo = FirebaseAuth.instance.currentUser;

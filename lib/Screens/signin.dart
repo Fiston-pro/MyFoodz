@@ -15,11 +15,6 @@ class LoginScreen extends StatelessWidget {
   Duration get loginTime => Duration(milliseconds: 2250);
   AuthService authService = new AuthService();
 
-  //recover password
-  Future<String?>? resetPassword(String email) async {
-    await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
-    return "null";
-}
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +28,15 @@ class LoginScreen extends StatelessWidget {
           builder: (context) => SplashScreen(),
         ));
       },
-      onRecoverPassword: resetPassword(String email),
+      onRecoverPassword: authService.resetPassword,
       theme: LoginTheme(
         logoWidth: 1,
         primaryColor: Colors.green,
+        accentColor: Colors.green,
         pageColorDark: Color.fromRGBO(189, 225, 181, 1),
         pageColorLight: Colors.green,
+        inputTheme: InputDecorationTheme(prefixIconColor: Colors.green),
+        cardTheme: CardTheme(shadowColor: Colors.green)
 
       ),
     );
