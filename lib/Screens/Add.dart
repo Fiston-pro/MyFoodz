@@ -88,9 +88,13 @@ class _AddPageState extends State<AddPage> {
             initialDate: dateTime,
             firstDate: DateTime(dateTime.year - 1),
             lastDate: DateTime(dateTime.year + 1),
-            borderRadius: 16,
+            borderRadius: 20,
             fontFamily: "Poppins",
             height: 300,
+            theme: ThemeData(
+              primaryColor: Color.fromRGBO(189, 225, 181, 1),
+              primarySwatch: Colors.green,
+              ),
           ))!;
     setState(() {});
   }
