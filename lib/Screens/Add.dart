@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:myfoodz/Widgets/AddingBlock.dart';
+import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 
 class AddPage extends StatefulWidget {
   const AddPage({ Key? key }) : super(key: key);
@@ -16,6 +18,8 @@ class _AddPageState extends State<AddPage> {
   final puController = TextEditingController();
   final tpController = TextEditingController();
 
+  DateTime dateTime = DateTime.now();//initialising the date 
+  var formatter = new DateFormat.yMd();//format for the date a choosen date
   List<Map<String,dynamic>> data = [];  //data for all items
   int totalPrice = 0;  //total price to be displayed big on the add page
   @override
@@ -47,7 +51,13 @@ class _AddPageState extends State<AddPage> {
               Text('Total Price', style: TextStyle(fontFamily: 'Poppins', fontSize: 18, fontWeight: FontWeight.w600),),
               Text( totalPrice.toString() +' Zl', style: TextStyle(fontFamily: 'Poppins',fontSize: 40, fontWeight: FontWeight.w700, color: Colors.white),),
               SizedBox(height: 20,),
-              Text('Done on 11/05/2021',style: TextStyle(fontFamily: 'Poppins',fontSize: 16,),),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Done on '+ formatter.format(dateTime) ,style: TextStyle(fontFamily: 'Poppins',fontSize: 16,),),
+                  IconButton(onPressed: (){datePicker();}, icon: Icon(Icons.calendar_today_rounded))
+                ],
+              ),
               SizedBox(height: 10,),
               AddingBlock(data: data,)
             ],
@@ -71,6 +81,21 @@ class _AddPageState extends State<AddPage> {
   }
 
   // add to list
+  // called when you press the icon button
+  void datePicker() async {
+    dateTime = (await showRoundedDatePicker(
+            context: context,
+            initialDate: dateTime,
+            firstDate: DateTime(dateTime.year - 1),
+            lastDate: DateTime(dateTime.year + 1),
+            borderRadius: 16,
+            fontFamily: "Poppins",
+            height: 300,
+          ))!;
+    setState(() {});
+  }
+
+
       //----------------------------------------------------------------------------- Dialog  box ----------------------------------------------------------------------------
       Future<Map<String,dynamic>> itemInput(BuildContext context) async {
           String metric = "/Kg";
@@ -268,9 +293,7 @@ class _AddPageState extends State<AddPage> {
         void changeTp(){
           if (tpController.text != "" && qtyController.text != ""){
             puController.text = (double.parse(tpController.text)/double.parse(qtyController.text)).toStringAsFixed(2).toString();
-          }else if (tpController.text.isEmpty){
-            puController.text = "";
-          }else if (qtyController.text.isEmpty && puController.text.isNotEmpty){
+          }else if (tpController.text != "" && puController.text != ""){
             puController.text = (double.parse(tpController.text)/double.parse(puController.text)).toStringAsFixed(2).toString();            
           }
         }
