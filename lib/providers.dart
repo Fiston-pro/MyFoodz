@@ -43,4 +43,9 @@ class UserDataNotifier extends StateNotifier<UserData> {
   List? getThingsShopped(String date){
     return state.history[date];
   }
+
+  final userDataProvider = StateNotifierProvider<UserDataNotifier>((ref) => {
+    return UserDataNotifier()
+    });
+
 }
