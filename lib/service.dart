@@ -3,7 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter_login/flutter_login.dart'; //Login page package
-import 'package:myfoodz/modal.dart';// modal for user data
+import 'package:myfoodz/modal.dart';
+import 'package:myfoodz/providers.dart';// modal for user data
 
 //Firestore database class
 class DatabaseService {
@@ -11,9 +12,9 @@ class DatabaseService {
   //initialise firestore
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
-  Future<UserData>? get_data (String id) async{
+  Future<Map<String, dynamic>?> getData (String id) async{
     var snap = await _db.collection("users").doc(id).get();
-    return UserData.fromMap(snap.data());
+    return snap.data();
   }
 
 }

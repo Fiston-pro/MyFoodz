@@ -1,19 +1,31 @@
 
 class UserData {
-  late String name;
-  late String? email;
-  late String birthdate;
-  late String uid;
-  var foods = Map<String,Map<String,Map<String,String>>>();
-  var history = Map<String,List<Map<String,String>>>();
+  final String name;
+  final String? email;
+  final String birthdate;
+  final String uid;
+  final Map<String,Map<String,Map<String,String>>> foods;
+  final Map<dynamic,List<Map<String,String>>> history;
 
-  UserData({required this.name,required this.birthdate, required this.foods,
+  const UserData({required this.name,required this.birthdate, required this.foods,
   required this.history, required this.email, required this.uid});
 
+  UserData copyWith({String? name,String? email,String? birthdate,String? uid, Map<String,Map<String,Map<String,String>>>? foods,
+  Map<dynamic,List<Map<String,String>>>? history}) {
+    return UserData(
+      name: name ?? this.name ,
+      email: email ?? this.email,
+      birthdate:  birthdate ?? this.birthdate,
+      uid: uid ?? this.uid,
+      foods:  foods ?? this.foods,
+      history:  history ?? this.history,
+    );
+  }
+
   //get data from map of firestore
-  factory UserData.fromMap(Map<String,dynamic>? data){
+  UserData fromMap(Map<String,dynamic>? data){
       return UserData(
-      name: data!["name"],
+      name: data!["name"] ?? this.name,
       email: data["email"]??"",
       birthdate:  data["birthdate"]??"",
       uid: data["uid"]??"",
@@ -33,32 +45,6 @@ class UserData {
       "history": history
     });
   }
-
-  //sends the name
-  String get_name(){
-    return name;
-  }
-  //sends the birthday
-  String get_birthdate(){
-    return birthdate;
-  }
-  //sends all the foods he ate 
-  List get_foods(){
-    return foods.keys.toList();
-  }
-  //sends timestamps of a certain food
-  Map? get_timestamps_food(String item){
-    return foods[item];
-  }
-  //sends all dates you shopped
-  List get_timestamps_shop(){
-    return history.keys.toList();
-  }
-  //sends all items shopped of a specific date
-  List? get_things_shopped(String date){
-    return history[date];
-  }
-
 }
 
 // Thought of making different modals but the problem I would increase the boilerplate code
