@@ -14,7 +14,7 @@ class SplashScreen extends StatelessWidget {
       backgroundColor: Color.fromRGBO(189, 225, 181, 1),
       splash: Image.asset('assets/logo.png'),
       splashIconSize: double.infinity,
-      //checks if the user is signed in and goes to homepage or to first signthem in
+      //checks if the user is signed in and goes to homepage or to first sign them in
       nextScreen: FirebaseAuth.instance.currentUser != null ? HomePage() : LoginScreen(),
       splashTransition: SplashTransition.fadeTransition,
       pageTransitionType: PageTransitionType.bottomToTop,

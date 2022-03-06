@@ -26,7 +26,7 @@ class UserDataNotifier extends StateNotifier<UserData> {
   void addHistory(Map<dynamic,List<Map<String,String>>> homeData){
     state = state.copyWith(history: homeData);
   }
-
+  //------- FOODS -----------//
   //sends all the foods he ate 
   List getFoods(){
     return state.foods.keys.toList();
@@ -35,6 +35,7 @@ class UserDataNotifier extends StateNotifier<UserData> {
   Map? getTimestampsFood(String item){
     return state.foods[item];
   }
+  //-------- HISTORY ---------------//
   //sends all dates you shopped
   List getTimestampsShop(){
     return state.history.keys.toList();
@@ -43,9 +44,5 @@ class UserDataNotifier extends StateNotifier<UserData> {
   List? getThingsShopped(String date){
     return state.history[date];
   }
-
-  final userDataProvider = StateNotifierProvider<UserDataNotifier>((ref) => {
-    return UserDataNotifier()
-    });
 
 }

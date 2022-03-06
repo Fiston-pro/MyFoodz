@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:myfoodz/Widgets/DateBlock.dart';
+import 'package:myfoodz/modal.dart';
+import 'package:myfoodz/providers.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({ Key? key }) : super(key: key);
+class HomePage extends ConsumerWidget {
+  final userDataProvider = StateNotifierProvider<UserDataNotifier,UserData>((ref) => UserDataNotifier());
 
   @override
-  _HomePageState createState() => _HomePageState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
 
-class _HomePageState extends State<HomePage> {
-  @override
-  Widget build(BuildContext context) {
+    var timestamps = ref.read(userDataProvider).history.keys.toList();
     return Scaffold(
       backgroundColor: Color.fromRGBO(189, 225, 181, 1),
       body: SafeArea(
@@ -32,6 +33,7 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             SizedBox(height: 50,),
+            DateBlock()
           ],
         ),
       ),
