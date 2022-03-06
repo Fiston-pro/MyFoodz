@@ -6,10 +6,7 @@ import 'package:myfoodz/Screens/Chart.dart';
 import 'package:myfoodz/Screens/Home.dart';
 import 'package:myfoodz/Screens/SplashScreen.dart';
 //firebase
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:myfoodz/Screens/signin.dart';
-import 'package:myfoodz/modal.dart';
 
 void main() async{
   //initialise firebase
