@@ -19,7 +19,7 @@ class _AddPageState extends State<AddPage> {
   final tpController = TextEditingController();
 
   DateTime dateTime = DateTime.now();//initialising the date 
-  var formatter = new DateFormat.yMd();//format for the date a choosen date
+  var formatter = new DateFormat("dd/MM/yyyy");//format for the date a choosen date
   List<Map<String,dynamic>> data = [];  //data for all items added
   late Map<dynamic, List<Map<String,dynamic>>> homeData;
   int totalPrice = 0;  //total price to be displayed big on the add page
