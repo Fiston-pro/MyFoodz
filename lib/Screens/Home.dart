@@ -22,7 +22,12 @@ class HomePage extends ConsumerWidget {
               children: [
                 IconButton(onPressed: (){Navigator.pushNamed(context, '/Chart');}, icon: Icon(Icons.bar_chart_rounded,size: 40,color: Colors.white,)),
                 Text('MY FOODZ',style: TextStyle(fontSize: 23, fontFamily: 'Poppins',color: Colors.white,  fontWeight: FontWeight.w700)),
-                IconButton(onPressed: (){Navigator.pushNamed(context, '/Add');}, icon: Icon(Icons.add_rounded,size: 40,color: Colors.white,),)
+                IconButton(onPressed: () async {
+                  Map<dynamic,List<Map<String,String>>>? result = await Navigator.pushNamed(context, '/Add');
+                  if (result!= null){
+                    ref.read(userDataProvider.notifier).addHistory(result);
+                  }
+                  }, icon: Icon(Icons.add_rounded,size: 40,color: Colors.white,),)
               ],
             ),
             SizedBox(height: 100,),
