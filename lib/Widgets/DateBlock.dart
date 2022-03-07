@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:myfoodz/Widgets/PastPurchases.dart';
 
 class DateBlock extends StatefulWidget {
-  const DateBlock({ Key? key }) : super(key: key);
+  final String timestamp;
+  final List<Map<String, String>>? data;
 
+  const DateBlock({ Key? key, required this.data, required this.timestamp }) : super(key: key);
   @override
   _DateBlockState createState() => _DateBlockState();
 }
@@ -15,9 +17,13 @@ class _DateBlockState extends State<DateBlock> {
       width: 280,
       child: Column(
         children: [
-          Text('Last Week on Monday',style: TextStyle(fontFamily: 'Poppins', fontSize: 18),),
+          Text('Last Week on Monday'+ widget.timestamp,style: TextStyle(fontFamily: 'Poppins', fontSize: 18),),
           SizedBox(height: 20,),
-          PastPurchases()
+          ListView.builder(
+            itemCount: widget.data!.length,
+            itemBuilder: (context,index) {
+              return PastPurchases();
+            })
         ],
       ),
     );

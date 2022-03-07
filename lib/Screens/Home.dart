@@ -9,8 +9,8 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
-    var timestamps = ref.read(userDataProvider).history.keys.toList();
+    UserData user= ref.watch(userDataProvider);
+    List<dynamic> timestamps = ref.read(userDataProvider.notifier).getTimestampsShop();
     return Scaffold(
       backgroundColor: Color.fromRGBO(189, 225, 181, 1),
       body: SafeArea(
@@ -29,11 +29,16 @@ class HomePage extends ConsumerWidget {
             Column(
               children: [
                 Text('Welcome Back,', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 25, fontFamily: 'Poppins', color: Colors.white),),
-                Text('Fiston', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 40, fontFamily: 'Poppins', color: Colors.white),)
+                Text(user.name, style: TextStyle(fontWeight: FontWeight.w700, fontSize: 40, fontFamily: 'Poppins', color: Colors.white),)
               ],
             ),
             SizedBox(height: 50,),
-            DateBlock()
+            ListView.builder(
+              itemCount: timestamps.length,
+              itemBuilder: (context,index) {
+                // we pass only the timestamp down the widget
+                return DateBlock(timestamp: timestamps[index],data: user.history[timestamps[index]]);
+              })
           ],
         ),
       ),
