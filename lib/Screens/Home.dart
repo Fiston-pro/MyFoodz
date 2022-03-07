@@ -34,6 +34,7 @@ class HomePage extends ConsumerWidget {
             ),
             SizedBox(height: 50,),
             ListView.builder(
+              shrinkWrap: true,
               itemCount: timestamps.length,
               itemBuilder: (context,index) {
                 // we pass only the timestamp down the widget
