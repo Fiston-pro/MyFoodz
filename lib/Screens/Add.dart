@@ -50,6 +50,7 @@ class _AddPageState extends State<AddPage> {
                       homeData = {dateTime: data};
                       Navigator.pop(context, homeData);
                     }
+                    Navigator.pop(context);
                     }, child: Text('Save',style: TextStyle(color: Colors.white,fontWeight: FontWeight.w700, fontFamily: 'Poppins',fontSize: 25),)),
                 ],
               ),

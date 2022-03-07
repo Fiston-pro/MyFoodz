@@ -25,6 +25,7 @@ class HomePage extends ConsumerWidget {
                 IconButton(onPressed: () async {
                   var result = await Navigator.pushNamed(context, '/Add');
                   if (result!= null){
+                    print(result);
                     ref.read(userDataProvider.notifier).addHistory(result);
                   }
                   }, icon: Icon(Icons.add_rounded,size: 40,color: Colors.white,),)
