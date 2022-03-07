@@ -21,8 +21,8 @@ class _AddPageState extends State<AddPage> {
   DateTime dateTime = DateTime.now();//initialising the date 
   var formatter = new DateFormat("dd/MM/yyyy");//format for the date a choosen date
   List<Map<String,dynamic>> data = [];  //data for all items added
-  late Map<dynamic, List<Map<String,dynamic>>> homeData;
-  int totalPrice = 0;  //total price to be displayed big on the add page
+  late Map<dynamic, List<Map<String,dynamic>>> homeData = {};
+  double totalPrice = 0;  //total price to be displayed big on the add page
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
@@ -47,7 +47,7 @@ class _AddPageState extends State<AddPage> {
                   TextButton(onPressed: (){Navigator.pop(context);}, child: Text('Cancel',style: TextStyle(color: Colors.white,fontWeight: FontWeight.w700, fontFamily: 'Poppins',fontSize: 25),)),
                   TextButton(onPressed: (){
                     if (data.isNotEmpty){
-                      homeData = {dateTime: data};
+                      homeData[formatter.format(dateTime)] = data;
                       Navigator.pop(context, homeData);
                     }
                     Navigator.pop(context);
@@ -77,7 +77,8 @@ class _AddPageState extends State<AddPage> {
           Map<String,dynamic> item = await itemInput(context);
           setState(() {
             data.add(item);
-            totalPrice = totalPrice + int.parse(item["tp"]);
+            totalPrice = totalPrice + double.parse(item["tp"]);
+            
           });
         },
         backgroundColor: Colors.white,
@@ -295,7 +296,7 @@ class _AddPageState extends State<AddPage> {
         // Balance the value of tp according qty and p/u
         void changePu(){
           if (qtyController.text.isNotEmpty && puController.text.isNotEmpty){
-            tpController.text = (double.parse(qtyController.text)*double.parse(puController.text)).toStringAsFixed(2).toString();
+            tpController.text = (double.parse(qtyController.text)*double.parse(puController.text)).toStringAsFixed(2);
           }else if (puController.text.isEmpty){
             tpController.text = "";
           }
@@ -303,9 +304,9 @@ class _AddPageState extends State<AddPage> {
         // Balance the value of p/u according tp and qty
         void changeTp(){
           if (tpController.text != "" && qtyController.text != ""){
-            puController.text = (double.parse(tpController.text)/double.parse(qtyController.text)).toStringAsFixed(2).toString();
+            puController.text = (double.parse(tpController.text)/double.parse(qtyController.text)).toStringAsFixed(2);
           }else if (tpController.text != "" && puController.text != ""){
-            puController.text = (double.parse(tpController.text)/double.parse(puController.text)).toStringAsFixed(2).toString();            
+            puController.text = (double.parse(tpController.text)/double.parse(puController.text)).toStringAsFixed(2);            
           }
         }
         // onchange of Qty text field
