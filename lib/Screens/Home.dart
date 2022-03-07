@@ -23,7 +23,7 @@ class HomePage extends ConsumerWidget {
                 IconButton(onPressed: (){Navigator.pushNamed(context, '/Chart');}, icon: Icon(Icons.bar_chart_rounded,size: 40,color: Colors.white,)),
                 Text('MY FOODZ',style: TextStyle(fontSize: 23, fontFamily: 'Poppins',color: Colors.white,  fontWeight: FontWeight.w700)),
                 IconButton(onPressed: () async {
-                  Map<dynamic,List<Map<String,String>>>? result = await Navigator.pushNamed(context, '/Add');
+                  var result = await Navigator.pushNamed(context, '/Add');
                   if (result!= null){
                     ref.read(userDataProvider.notifier).addHistory(result);
                   }

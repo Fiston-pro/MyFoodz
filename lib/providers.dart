@@ -23,7 +23,7 @@ class UserDataNotifier extends StateNotifier<UserData> {
     });
   }
   //add data to history 
-  void addHistory(Map<dynamic,List<Map<String,String>>> homeData){
+  void addHistory(var homeData){
     state = state.copyWith(history: homeData);
   }
   //------- FOODS -----------//
