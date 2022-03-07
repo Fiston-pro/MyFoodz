@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class FoodTile extends StatefulWidget {
-  const FoodTile({ Key? key }) : super(key: key);
+  final Map<String, String> data;
+  const FoodTile({ Key? key, required this.data }) : super(key: key);
 
   @override
   _FoodTileState createState() => _FoodTileState();

@@ -19,11 +19,7 @@ class _DateBlockState extends State<DateBlock> {
         children: [
           Text('Last Week on Monday'+ widget.timestamp,style: TextStyle(fontFamily: 'Poppins', fontSize: 18),),
           SizedBox(height: 20,),
-          ListView.builder(
-            itemCount: widget.data!.length,
-            itemBuilder: (context,index) {
-              return PastPurchases();
-            })
+          PastPurchases(data: widget.data)
         ],
       ),
     );

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:myfoodz/Widgets/FoodTile.dart';
 
 class PastPurchases extends StatefulWidget {
-  const PastPurchases({ Key? key }) : super(key: key);
+  final List<Map<String, String>>? data;
+
+  const PastPurchases({ Key? key, this.data }) : super(key: key);
 
   @override
   _PastPurchasesState createState() => _PastPurchasesState();
@@ -24,7 +26,12 @@ class _PastPurchasesState extends State<PastPurchases> {
               Expanded(flex: 2, child:Text("Price",style: TextStyle(fontFamily: 'Poppins', fontSize: 18, fontWeight: FontWeight.w600),))
             ],
           ),
-          FoodTile(),
+          ListView.builder(
+            itemCount: widget.data!.length,
+            itemBuilder: (context, index){
+                return FoodTile(data: widget.data![index]);
+            }
+          ),
           SizedBox(height: 20,),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
