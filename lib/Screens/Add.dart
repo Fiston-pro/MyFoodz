@@ -148,7 +148,6 @@ class _AddPageState extends State<AddPage> {
                         Row(
                           children: [
                             Expanded(
-                              flex: 2,
                               child: TextFormField(
                                 validator: (text) {
                                   return text!.isNotEmpty ? null : "No Qty";
@@ -178,7 +177,6 @@ class _AddPageState extends State<AddPage> {
                             ),
                             Text(" X ", style: TextStyle(fontWeight: FontWeight.w700,fontFamily: "Poppins"),),                            
                             Expanded(
-                              flex: 2,
                               child: TextFormField(
                                 validator: (text) {
                                   return text!.isNotEmpty ? null : "No P/U";
