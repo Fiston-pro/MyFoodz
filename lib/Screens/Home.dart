@@ -5,7 +5,7 @@ import 'package:myfoodz/modal.dart';
 import 'package:myfoodz/providers.dart';
 
 class HomePage extends ConsumerWidget {
-  final userDataProvider = StateNotifierProvider<UserDataNotifier,UserData>((ref) => UserDataNotifier());
+  static final userDataProvider = StateNotifierProvider<UserDataNotifier,UserData>((ref) => UserDataNotifier());
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
