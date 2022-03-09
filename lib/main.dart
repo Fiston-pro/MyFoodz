@@ -21,7 +21,7 @@ void main() async{
       //use statenotifier to pass the object down the tree
       runApp(ProviderScope(
         child: MaterialApp(
-              initialRoute: '/Home',
+              initialRoute: '/',
               routes: {
                 '/': (context)=> SplashScreen(),
                 '/Home': (context)=> HomePage(),

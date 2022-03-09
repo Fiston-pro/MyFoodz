@@ -21,6 +21,7 @@ class DatabaseService {
 
 // FireBase Auth class
 class AuthService {
+
     Future<String?> authUser(LoginData data) async {
     try {
        await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -92,6 +93,12 @@ class AuthService {
     //populate user object
     UserData user =UserData(name: data.name, birthdate: "", foods: {}, history: {}, email: userInfo?.email, uid: userInfo!.uid);
     //post data to firestore
-    await FirebaseFirestore.instance.collection("users").doc(userInfo.uid).set(user.toMap());
+    await FirebaseFirestore.instance.collection("users").doc(userInfo.uid).set(
+      {"name": "",
+      "email": userInfo.email,
+      "uid": userInfo.uid,
+      "birthdate": "",
+      "foods": {},
+      "history": {}});
   }
 }
