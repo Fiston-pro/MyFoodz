@@ -37,8 +37,28 @@ class LoginScreen extends StatelessWidget {
         pageColorLight: Colors.green,
         inputTheme: InputDecorationTheme(prefixIconColor: Colors.green),
         cardTheme: CardTheme(shadowColor: Colors.green)
-
       ),
+      additionalSignupFields: [
+        UserFormField(
+            displayName: "Nickname" ,keyName: 'nickname'),
+      ],
+       messages: LoginMessages(
+      //   userHint: 'User',
+      //   passwordHint: 'Pass',
+      //   confirmPasswordHint: 'Confirm',
+      //   loginButton: 'LOG IN',
+      //   signupButton: 'REGISTER',
+         forgotPasswordButton: 'Forgot huh?',
+      //   recoverPasswordButton: 'HELP ME',
+      //   goBackButton: 'GO BACK',
+      //   confirmPasswordError: 'Not match!',
+         recoverPasswordIntro: 'Don\'t feel bad. Happens all the time.',
+      //   recoverPasswordDescription: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
+         recoverPasswordSuccess: 'Password rescued successfully',
+         flushbarTitleError: 'Oh no!',
+         flushbarTitleSuccess: 'Success!',
+      //   providersTitle: 'login with'
+       ),
     );
   }
 

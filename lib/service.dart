@@ -94,7 +94,7 @@ class AuthService {
     UserData user =UserData(name: data.name, birthdate: "", foods: {}, history: {}, email: userInfo?.email, uid: userInfo!.uid);
     //post data to firestore
     await FirebaseFirestore.instance.collection("users").doc(userInfo.uid).set(
-      {"name": "",
+      {"name": data.additionalSignupData["nickname"],
       "email": userInfo.email,
       "uid": userInfo.uid,
       "birthdate": "",
