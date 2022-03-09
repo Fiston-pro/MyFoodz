@@ -206,8 +206,7 @@ class _AddPageState extends State<AddPage> {
                                     
                               ),
                             ),
-                            SizedBox(
-                              width: 50,
+                            Expanded(
                               child: DropdownButton(
                                 dropdownColor: Color.fromRGBO(189, 225, 181, 1),
                                 alignment: AlignmentDirectional.bottomEnd,
