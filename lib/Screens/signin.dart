@@ -30,7 +30,7 @@ class LoginScreen extends StatelessWidget {
       },
       onRecoverPassword: authService.resetPassword,
       theme: LoginTheme(
-        logoWidth: 1,
+        logoWidth: 0.8,
         primaryColor: Colors.green,
         accentColor: Colors.green,
         pageColorDark: Color.fromRGBO(189, 225, 181, 1),
