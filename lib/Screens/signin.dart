@@ -4,13 +4,6 @@ import 'package:flutter_login/flutter_login.dart'; //Package for login page
 import 'package:myfoodz/Screens/SplashScreen.dart';
 import 'package:myfoodz/service.dart'; //firebase
 
-
-const users = const {
-  'dribbble@gmail.com': '12345',
-  'hunter@gmail.com': 'hunter',
-};
-
-
 class LoginScreen extends StatelessWidget {
   Duration get loginTime => Duration(milliseconds: 2250);
   AuthService authService = new AuthService();
