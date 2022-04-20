@@ -228,7 +228,7 @@ class _AddPageState extends State<AddPage> {
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text("  = ",style: TextStyle(fontFamily: "Poppins",fontWeight: FontWeight.w700),),
+                            Text(" = ",style: TextStyle(fontFamily: "Poppins",fontWeight: FontWeight.w700),),
                             Expanded(
                               child: TextFormField(
                                 validator: (text) {
