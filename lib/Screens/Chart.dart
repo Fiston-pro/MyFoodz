@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myfoodz/Widgets/chartWidget.dart';
 
-
 class ChartPage extends StatefulWidget {
   const ChartPage({ Key? key }) : super(key: key);
 
