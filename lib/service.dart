@@ -56,13 +56,8 @@ class AuthService {
         email: data.name.toString(),
         password: data.password.toString()
       );
-      //verify the email
-      User? user = FirebaseAuth.instance.currentUser;
-      if (user!= null && !user.emailVerified) {
-        await user.sendEmailVerification();
-      }
       //Initialise data in firebase
-      post_data_to_firestore(data);
+      postDataToFirestore(data);
       // go back to login page
       return null;
     } on FirebaseAuthException catch (e) {
@@ -88,11 +83,12 @@ class AuthService {
 }
 
     // post data to firestore
-  post_data_to_firestore(data) async {
+  postDataToFirestore(data) async {
     User? userInfo = FirebaseAuth.instance.currentUser;
     //populate user object
     UserData user =UserData(name: data.name, birthdate: "", foods: {}, history: {}, email: userInfo?.email, uid: userInfo!.uid);
     //post data to firestore
+    print(data.additionalSignupData["nickname"]);
     await FirebaseFirestore.instance.collection("users").doc(userInfo.uid).set(
       {"name": data.additionalSignupData["nickname"],
       "email": userInfo.email,

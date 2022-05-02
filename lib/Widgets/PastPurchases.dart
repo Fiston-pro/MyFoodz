@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:myfoodz/Widgets/FoodTile.dart';
 
 class PastPurchases extends StatefulWidget {
-  final List<Map<String, String>>? data;
+  final List<Map<String, dynamic>>? data;
 
   const PastPurchases({ Key? key, this.data }) : super(key: key);
 

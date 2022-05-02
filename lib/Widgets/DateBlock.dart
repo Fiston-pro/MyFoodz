@@ -3,7 +3,7 @@ import 'package:myfoodz/Widgets/PastPurchases.dart';
 
 class DateBlock extends StatefulWidget {
   final String timestamp;
-  final List<Map<String, String>>? data;
+  final List<Map<String, dynamic>>? data;
 
   const DateBlock({ Key? key, required this.data, required this.timestamp }) : super(key: key);
   @override
