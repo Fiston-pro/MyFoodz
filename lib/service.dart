@@ -3,20 +3,33 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter_login/flutter_login.dart'; //Login page package
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myfoodz/modal.dart';
 import 'package:myfoodz/providers.dart';// modal for user data
 
+
 //Firestore database class
 class DatabaseService {
-  
-  //initialise firestore
-  final FirebaseFirestore _db = FirebaseFirestore.instance;
 
-  Future<Map<String, dynamic>?> getData (String id) async{
-    var snap = await _db.collection("users").doc(id).get();
-    return snap.data();
+  DatabaseService(this.ref);
+
+  final Ref ref;
+
+
+  final FirebaseFirestore _db = FirebaseFirestore.instance;  //initialise firestore
+  User? userInfo = FirebaseAuth.instance.currentUser; //get the user
+
+  //get data from firestore
+  void getData () async{
+    var snap = await _db.collection("users").doc(userInfo?.uid).get();
+    ref.read(userDataProvider.notifier).fromMap(snap.data());
+    print('data');
   }
+  //send data to firestore
+  void postData(){
 
+  }
+  
 }
 
 // FireBase Auth class
@@ -85,6 +98,8 @@ class AuthService {
     // post data to firestore
   postDataToFirestore(data) async {
     User? userInfo = FirebaseAuth.instance.currentUser;
+    //update the provider
+    //ref.read(userDataProvider.notifier);
     //populate user object
     UserData user =UserData(name: data.name, birthdate: "", foods: {}, history: {}, email: userInfo?.email, uid: userInfo!.uid);
     //post data to firestore

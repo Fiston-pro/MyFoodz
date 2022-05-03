@@ -3,11 +3,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myfoodz/Widgets/DateBlock.dart';
 import 'package:myfoodz/modal.dart';
 import 'package:myfoodz/providers.dart';
+import 'package:myfoodz/service.dart';
 
 
 class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    //database stuff
+    final databaseProvider = Provider<DatabaseService>((ref) {return DatabaseService(ref);});
+    ref.read(databaseProvider).getData();
+    //provider stuff
     UserData user= ref.watch(userDataProvider);
     List<dynamic> timestamps = ref.read(userDataProvider.notifier).getTimestampsShop();
     return Scaffold(
@@ -19,8 +24,10 @@ class HomePage extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
+                // Button to take you to the chart page
                 IconButton(onPressed: (){Navigator.pushNamed(context, '/Chart');}, icon: Icon(Icons.bar_chart_rounded,size: 40,color: Colors.white,)),
                 Text('MY FOODZ',style: TextStyle(fontSize: 23, fontFamily: 'Poppins',color: Colors.white,  fontWeight: FontWeight.w700)),
+                // Button to take you to the adding page
                 IconButton(onPressed: () async {
                   var result = await Navigator.pushNamed(context, '/Add');
                   if (result!= null){
@@ -38,6 +45,7 @@ class HomePage extends ConsumerWidget {
               ],
             ),
             SizedBox(height: 50,),
+            timestamps.isEmpty ? Text('There is no data'):
             ListView.builder(
               shrinkWrap: true,
               itemCount: timestamps.length,

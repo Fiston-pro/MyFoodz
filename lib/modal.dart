@@ -22,6 +22,7 @@ class UserData {
     );
   }
 
+  //--------------- we don't need fromMap and toMap because there is the providers------------
   //get data from map of firestore
   UserData fromMap(Map<String,dynamic>? data){
       return UserData(
