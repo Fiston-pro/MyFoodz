@@ -2,6 +2,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myfoodz/modal.dart';
 
+final userDataProvider = StateNotifierProvider<UserDataNotifier,UserData>((ref) => UserDataNotifier());
+
+
 class UserDataNotifier extends StateNotifier<UserData> {
   UserDataNotifier() : super(_initialValue);
   static const _initialValue = UserData(name:'',email:'',birthdate:'',uid:'',foods:{},history:{});

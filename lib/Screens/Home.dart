@@ -4,9 +4,8 @@ import 'package:myfoodz/Widgets/DateBlock.dart';
 import 'package:myfoodz/modal.dart';
 import 'package:myfoodz/providers.dart';
 
-class HomePage extends ConsumerWidget {
-  static final userDataProvider = StateNotifierProvider<UserDataNotifier,UserData>((ref) => UserDataNotifier());
 
+class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     UserData user= ref.watch(userDataProvider);
