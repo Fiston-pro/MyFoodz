@@ -7,34 +7,34 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myfoodz/modal.dart';
 import 'package:myfoodz/providers.dart';// modal for user data
 
-
 //Firestore database class
+final databaseProvider = Provider<DatabaseService>((ref) {return DatabaseService(ref);});
 class DatabaseService {
 
   DatabaseService(this.ref);
 
   final Ref ref;
 
-
   final FirebaseFirestore _db = FirebaseFirestore.instance;  //initialise firestore
-  User? userInfo = FirebaseAuth.instance.currentUser; //get the user
+  User? userInfo = FirebaseAuth.instance.currentUser; //get the authorized user
 
   //get data from firestore
   void getData () async{
+    print('posting data');
     var snap = await _db.collection("users").doc(userInfo?.uid).get();
     ref.read(userDataProvider.notifier).fromMap(snap.data());
-    print('data');
   }
   //send data to firestore
   void postData(){
-
+    print('posting data');
+    _db.collection("users").doc(userInfo?.uid).update({"history": ref.read(userDataProvider).history}).then((value) => print("History Updated"));
+    _db.collection("users").doc(userInfo?.uid).update({"foods": ref.read(userDataProvider).foods}).then((value) => print("Foods Updated"));
   }
   
 }
 
 // FireBase Auth class
 class AuthService {
-
     Future<String?> authUser(LoginData data) async {
     try {
        await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -97,17 +97,12 @@ class AuthService {
 
     // post data to firestore
   postDataToFirestore(data) async {
+    print('posting data');
     User? userInfo = FirebaseAuth.instance.currentUser;
-    //update the provider
-    //ref.read(userDataProvider.notifier);
-    //populate user object
-    UserData user =UserData(name: data.name, birthdate: "", foods: {}, history: {}, email: userInfo?.email, uid: userInfo!.uid);
-    //post data to firestore
-    print(data.additionalSignupData["nickname"]);
-    await FirebaseFirestore.instance.collection("users").doc(userInfo.uid).set(
+    await FirebaseFirestore.instance.collection("users").doc(userInfo?.uid).set(
       {"name": data.additionalSignupData["nickname"],
-      "email": userInfo.email,
-      "uid": userInfo.uid,
+      "email": userInfo?.email,
+      "uid": userInfo?.uid,
       "birthdate": "",
       "foods": {},
       "history": {}});

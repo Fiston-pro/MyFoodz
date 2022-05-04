@@ -11,7 +11,7 @@ class UserDataNotifier extends StateNotifier<UserData> {
   
   //get data from map of firestore
   void fromMap(Map<String,dynamic>? data){
-    state = state.copyWith(name: data!['name'],email: data['email'],birthdate:data['birthdate'],uid:data['uid'],foods:data['foods'],history:data['history']);  }
+    state = state.copyWith(name: data?['name'],email: data?['email'],birthdate:data?['birthdate'],uid:data?['uid'],foods:data?['foods'],history:data?['history']);  }
   // send data to firestore
   Map<String,dynamic> toMap(){
     return ({

@@ -4,14 +4,14 @@ class UserData {
   final String? email;
   final String birthdate;
   final String uid;
-  final Map<String,Map<String,Map<String,String>>> foods;
-  final Map<dynamic,List<Map<String,dynamic>>> history;
+  final Map<String,dynamic> foods;
+  final Map<dynamic,dynamic> history;
 
   const UserData({required this.name,required this.birthdate, required this.foods,
   required this.history, required this.email, required this.uid});
 
-  UserData copyWith({String? name,String? email,String? birthdate,String? uid, Map<String,Map<String,Map<String,String>>>? foods,
-  Map<dynamic,List<Map<String,dynamic>>>? history}) {
+  UserData copyWith({String? name,String? email,String? birthdate,String? uid, Map<String,dynamic>? foods,
+  Map<dynamic,dynamic>? history}) {
     return UserData(
       name: name ?? this.name ,
       email: email ?? this.email,

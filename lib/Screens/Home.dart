@@ -14,7 +14,7 @@ class HomePage extends ConsumerWidget {
     ref.read(databaseProvider).getData();
     //provider stuff
     UserData user= ref.watch(userDataProvider);
-    List<dynamic> timestamps = ref.read(userDataProvider.notifier).getTimestampsShop();
+    List<dynamic> timestamps = ref.read(userDataProvider).history.keys.toList();
     return Scaffold(
       backgroundColor: Color.fromRGBO(189, 225, 181, 1),
       body: SafeArea(
@@ -32,7 +32,8 @@ class HomePage extends ConsumerWidget {
                   var result = await Navigator.pushNamed(context, '/Add');
                   if (result!= null){
                     print(result);
-                    ref.read(userDataProvider.notifier).addHistory(result);
+                    ref.read(userDataProvider.notifier).addHistory(result);  //to update the provider
+                    ref.read(databaseProvider).postData(); //keep data on firebase
                   }
                   }, icon: Icon(Icons.add_rounded,size: 40,color: Colors.white,),)
               ],
@@ -46,13 +47,15 @@ class HomePage extends ConsumerWidget {
             ),
             SizedBox(height: 50,),
             timestamps.isEmpty ? Text('There is no data'):
-            ListView.builder(
-              shrinkWrap: true,
-              itemCount: timestamps.length,
-              itemBuilder: (context,index) {
-                // we pass only the timestamp down the widget
-                return DateBlock(timestamp: timestamps[index],data: user.history[timestamps[index]]);
-              })
+            Expanded(
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: timestamps.length,
+                itemBuilder: (context,index) {
+                  // we pass only the timestamp down the widget
+                  return DateBlock(timestamp: timestamps[index],data: ref.read(userDataProvider).history[timestamps[index]]);
+                }),
+            )
           ],
         ),
       ),
