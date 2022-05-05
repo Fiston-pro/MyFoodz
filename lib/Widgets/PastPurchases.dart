@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:myfoodz/Widgets/FoodTile.dart';
 
 class PastPurchases extends StatefulWidget {
@@ -11,6 +12,19 @@ class PastPurchases extends StatefulWidget {
 }
 
 class _PastPurchasesState extends State<PastPurchases> {
+  var totalOfPurchases = 0;
+  getTotal(BuildContext context){
+    print("fiston is the best");
+    for(int i = 0; i < widget.data!.length; i++) {
+      totalOfPurchases = totalOfPurchases + int.parse(widget.data![i]["tp"]);
+    }
+  }
+
+  void initState() {
+    super.initState();
+    SchedulerBinding.instance?.addPostFrameCallback((_) => getTotal(context));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,7 +43,7 @@ class _PastPurchasesState extends State<PastPurchases> {
               ],
             ),
             SizedBox(height: 20,),
-            widget.data!.isEmpty ? Text('No data'):
+            widget.data!.isEmpty ? Text('There is data'):
             SizedBox(
               height: 50,
               child: Expanded(
@@ -45,7 +59,7 @@ class _PastPurchasesState extends State<PastPurchases> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(flex: 5, child: Text('Total', style: TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.w600,fontSize: 18),)),
-                Expanded(flex: 2, child:Text(' 40.01', style: TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.w600,fontSize: 18),))
+                Expanded(flex: 2, child:Text('${totalOfPurchases.toString()}', style: TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.w600,fontSize: 18),))
               ],
             )
           ],
