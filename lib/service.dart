@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter_login/flutter_login.dart'; //Login page package
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:myfoodz/modal.dart';
 import 'package:myfoodz/providers.dart';// modal for user data
 
 //Firestore database class
