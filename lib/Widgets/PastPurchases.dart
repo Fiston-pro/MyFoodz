@@ -13,7 +13,7 @@ class PastPurchases extends StatefulWidget {
 
 class _PastPurchasesState extends State<PastPurchases> {
   double totalOfPurchases = 0.0;
-  getTotal(BuildContext context){
+  getTotalOfProducts(BuildContext context){
     print("fiston is the best");
     for(int i = 0; i < widget.data!.length; i++) {
       totalOfPurchases = totalOfPurchases + double.parse(widget.data![i]["tp"]);
@@ -22,7 +22,7 @@ class _PastPurchasesState extends State<PastPurchases> {
 
   void initState() {
     super.initState();
-    SchedulerBinding.instance?.addPostFrameCallback((_) => getTotal(context));
+    SchedulerBinding.instance?.addPostFrameCallback((_) => getTotalOfProducts(context));
   }
 
   @override
