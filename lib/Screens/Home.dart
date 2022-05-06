@@ -7,8 +7,10 @@ import 'package:myfoodz/service.dart';
 
 
 class HomePage extends ConsumerWidget {
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    
     //database stuff
     final databaseProvider = Provider<DatabaseService>((ref) {return DatabaseService(ref);});
     ref.read(databaseProvider).getData();

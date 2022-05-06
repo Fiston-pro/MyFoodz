@@ -19,13 +19,13 @@ class DatabaseService {
 
   //get data from firestore
   void getData () async{
-    print('posting data');
+    print('posting data in get data from firestore function');
     var snap = await _db.collection("users").doc(userInfo?.uid).get();
     ref.read(userDataProvider.notifier).fromMap(snap.data());
   }
   //send data to firestore
   void postData(){
-    print('posting data');
+    print('posting data  in post data from firestore function ');
     _db.collection("users").doc(userInfo?.uid).update({"history": ref.read(userDataProvider).history}).then((value) => print("History Updated"));
     _db.collection("users").doc(userInfo?.uid).update({"foods": ref.read(userDataProvider).foods}).then((value) => print("Foods Updated"));
   }
@@ -96,7 +96,7 @@ class AuthService {
 
     // post data to firestore
   postDataToFirestore(data) async {
-    print('posting data');
+    print('posting data in the firestore after signup');
     User? userInfo = FirebaseAuth.instance.currentUser;
     await FirebaseFirestore.instance.collection("users").doc(userInfo?.uid).set(
       {"name": data.additionalSignupData["nickname"],

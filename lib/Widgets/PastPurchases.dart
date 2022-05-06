@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:myfoodz/Widgets/FoodTile.dart';
 
 class PastPurchases extends StatefulWidget {
@@ -14,7 +13,6 @@ class PastPurchases extends StatefulWidget {
 class _PastPurchasesState extends State<PastPurchases> {
   double totalOfPurchases = 0.0;
   getTotalOfProducts(BuildContext context){
-    print("fiston is the best");
     for(int i = 0; i < widget.data!.length; i++) {
       totalOfPurchases = totalOfPurchases + double.parse(widget.data![i]["tp"]);
     }
@@ -22,7 +20,8 @@ class _PastPurchasesState extends State<PastPurchases> {
 
   void initState() {
     super.initState();
-    SchedulerBinding.instance?.addPostFrameCallback((_) => getTotalOfProducts(context));
+    WidgetsBinding.instance!
+        .addPostFrameCallback((_) => getTotalOfProducts(context));
   }
 
   @override
