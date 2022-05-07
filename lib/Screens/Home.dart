@@ -11,9 +11,6 @@ class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     
-    //database stuff
-    final databaseProvider = Provider<DatabaseService>((ref) {return DatabaseService(ref);});
-    ref.read(databaseProvider).getData();
     //provider stuff
     UserData user= ref.watch(userDataProvider);
     List<dynamic> timestamps = ref.read(userDataProvider).history.keys.toList();
