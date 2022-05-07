@@ -7,7 +7,7 @@ final userDataProvider = StateNotifierProvider<UserDataNotifier,UserData>((ref) 
 
 class UserDataNotifier extends StateNotifier<UserData> {
   UserDataNotifier() : super(_initialValue);
-  static const _initialValue = UserData(name:'Hommie',email:'',birthdate:'',uid:'',foods:{},history:{});
+  static const _initialValue = UserData(name:'',email:'',birthdate:'',uid:'',foods:{},history:{});
   
   //get data from map of firestore
   void fromMap(Map<String,dynamic>? data){
