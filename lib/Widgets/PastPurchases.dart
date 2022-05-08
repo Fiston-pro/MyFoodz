@@ -13,9 +13,11 @@ class PastPurchases extends StatefulWidget {
 class _PastPurchasesState extends State<PastPurchases> {
   double totalOfPurchases = 0.0;
   getTotalOfProducts(BuildContext context){
+    double total = 0.0;
     for(int i = 0; i < widget.data!.length; i++) {
-      totalOfPurchases = totalOfPurchases + double.parse(widget.data![i]["tp"]);
+      total = total + double.parse(widget.data![i]["tp"]);
     }
+    setState(() {totalOfPurchases = total;});
   }
 
   void initState() {
