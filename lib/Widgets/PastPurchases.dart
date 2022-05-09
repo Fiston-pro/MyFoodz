@@ -29,7 +29,7 @@ class _PastPurchasesState extends State<PastPurchases> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.fromLTRB(40, 0, 40, 10),
+      margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
       padding: EdgeInsets.fromLTRB(25, 10, 0, 10),
       decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.only(topRight: Radius.circular(10),bottomLeft: Radius.circular(10))),
       child: Expanded(
