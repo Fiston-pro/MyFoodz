@@ -21,7 +21,7 @@ class _AddPageState extends State<AddPage> {
   DateTime dateTime = DateTime.now();//initialising the date 
   var formatter = new DateFormat("dd/MM/yyyy");//format for the date a choosen date
   List<Map<String,dynamic>> data = [];  //data for all items added
-  late Map<dynamic, List<Map<String,dynamic>>> homeData = {};
+  late Map<dynamic, List<Map<String,dynamic>>> historyData = {};
   double totalPrice = 0;  //total price to be displayed big on the add page
   @override
   void dispose() {
@@ -47,8 +47,8 @@ class _AddPageState extends State<AddPage> {
                   TextButton(onPressed: (){Navigator.pop(context);}, child: Text('Cancel',style: TextStyle(color: Colors.white,fontWeight: FontWeight.w700, fontFamily: 'Poppins',fontSize: 25),)),
                   TextButton(onPressed: (){
                     if (data.isNotEmpty){
-                      homeData[formatter.format(dateTime)] = data;
-                      Navigator.pop(context, homeData);
+                      historyData[formatter.format(dateTime)] = data;
+                      Navigator.pop(context, historyData);
                     }
                     Navigator.pop(context);
                     }, child: Text('Save',style: TextStyle(color: Colors.white,fontWeight: FontWeight.w700, fontFamily: 'Poppins',fontSize: 25),)),
