@@ -14,7 +14,7 @@ class _DateBlockState extends State<DateBlock> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 280,
+      width: 300,
       child: Column(
         children: [
           Text('Done on '+ widget.timestamp,style: TextStyle(fontFamily: 'Poppins', fontSize: 18),),
