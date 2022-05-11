@@ -27,6 +27,10 @@ class UserDataNotifier extends StateNotifier<UserData> {
   void addHistory(var homeData){
     state = state.copyWith(history: homeData);
   }
+  //add data to Foods 
+  void addFoods(var addData){
+    state = state.copyWith(foods: addData);
+  }
   void addName(String name){
     state = state.copyWith(name: name);
   }
