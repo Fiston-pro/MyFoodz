@@ -4,7 +4,7 @@ class UserData {
   final String? email;
   final String birthdate;
   final String uid;
-  final Map<String,dynamic> foods;
+  final Map<dynamic,dynamic> foods;
   final Map<dynamic,dynamic> history;
 
   const UserData({required this.name,required this.birthdate, required this.foods,
