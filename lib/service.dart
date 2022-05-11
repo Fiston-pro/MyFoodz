@@ -19,7 +19,7 @@ class DatabaseService {
 
   //get data from firestore
   void getData () async{
-    print('posting data in get data from firestore function');
+    print('getting data from firestore function');
     var snap = await _db.collection("users").doc(userInfo?.uid).get();
     ref.read(userDataProvider.notifier).fromMap(snap.data());
   }
