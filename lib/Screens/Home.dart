@@ -28,12 +28,7 @@ class HomePage extends ConsumerWidget {
                 Text('MY FOODZ',style: TextStyle(fontSize: 23, fontFamily: 'Poppins',color: Colors.white,  fontWeight: FontWeight.w700)),
                 // Button to take you to the adding page
                 IconButton(onPressed: () async {
-                  var result = await Navigator.pushNamed(context, '/Add');
-                  if (result!= null){
-                    print(result);
-                    ref.read(userDataProvider.notifier).addHistory(result);  //to update the provider
-                    ref.read(databaseProvider).postData(); //keep data on firebase
-                  }
+                  await Navigator.pushNamed(context, '/Add');
                   }, icon: Icon(Icons.add_rounded,size: 40,color: Colors.white,),)
               ],
             ),
@@ -48,6 +43,7 @@ class HomePage extends ConsumerWidget {
             timestamps.isEmpty ? Text('There is no data'):
             Expanded(
               child: ListView.builder(
+                scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
                 itemCount: timestamps.length,
                 itemBuilder: (context,index) {
