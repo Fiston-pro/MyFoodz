@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myfoodz/Widgets/DateBlock.dart';
 import 'package:myfoodz/modal.dart';
 import 'package:myfoodz/providers.dart';
-import 'package:myfoodz/service.dart';
 
 
 class HomePage extends ConsumerWidget {
