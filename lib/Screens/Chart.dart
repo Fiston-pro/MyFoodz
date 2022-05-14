@@ -10,7 +10,7 @@ class ChartPage extends StatefulWidget {
 
 class _ChartPageState extends State<ChartPage> {
 
-  List<String> foods = ['All','carbage','milk','apples','eggs','mushrooms']; 
+  List<String> foods; // Add a way to get data from the object 
 
   @override
   Widget build(BuildContext context) {
