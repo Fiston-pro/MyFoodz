@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myfoodz/Widgets/chartWidget.dart';
 
-class ChartPage extends StatefulWidget {
+class ChartPage extends ConsumerStatefulWidget {
   const ChartPage({ Key? key }) : super(key: key);
 
   @override
   _ChartPageState createState() => _ChartPageState();
 }
 
-class _ChartPageState extends State<ChartPage> {
+class _ChartPageState extends ConsumerState<ChartPage> {
 
   late List<String> foods; // Add a way to get data from the object 
+
 
   @override
   Widget build(BuildContext context) {
