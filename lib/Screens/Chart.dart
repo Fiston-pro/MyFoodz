@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myfoodz/Widgets/chartWidget.dart';
+import 'package:myfoodz/providers.dart';
 
 class ChartPage extends ConsumerStatefulWidget {
   const ChartPage({ Key? key }) : super(key: key);
@@ -11,8 +12,14 @@ class ChartPage extends ConsumerStatefulWidget {
 
 class _ChartPageState extends ConsumerState<ChartPage> {
 
-  late List<String> foods; // Add a way to get data from the object 
+  late Map<dynamic,dynamic> foods; // Add a way to get data from the object 
 
+  @override
+  void initState() {
+    super.initState();
+    // "ref" can be used in all life-cycles of a StatefulWidget.
+    foods = ref.read(userDataProvider).foods;
+  }
 
   @override
   Widget build(BuildContext context) {
